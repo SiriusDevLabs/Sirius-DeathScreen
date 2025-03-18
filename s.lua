@@ -19,7 +19,7 @@ RegisterCommand('adrev', function(source, args, rawCommand)
         target = source
     end
         
-    -- if Player(source).state['SASNET:IsStaff'] == "true" then
+    if Player(source).state['SASNET:IsStaff'] == "true" then
         local targetName = GetPlayerName(target)
         
         if target then
@@ -32,14 +32,14 @@ RegisterCommand('adrev', function(source, args, rawCommand)
             TriggerClientEvent('codem-notification', source, "You have successfully revived yourself.", 4000, "check")
             TriggerEvent('Kratos-Logging:AdrevLogs', source, GetPlayerName(source), GetPlayerName(source))
         end
-    -- else
-    --     TriggerClientEvent('codem-notification', source, "You must be clocked in to use this command.", 4000, "error")
-    -- end
+    else
+        TriggerClientEvent('codem-notification', source, "You must be clocked in to use this command.", 4000, "error")
+    end
 end)
 
 RegisterCommand('adres', function(source, args, rawCommand)
     local target = tonumber(args[1])
-    -- if Player(source).state['SASNET:IsStaff'] == "true" then
+    if Player(source).state['SASNET:IsStaff'] == "true" then
         if target then
             local targetPed = GetPlayerPed(target)
             if targetPed and targetPed ~= -1 then
@@ -54,7 +54,7 @@ RegisterCommand('adres', function(source, args, rawCommand)
             TriggerClientEvent('codem-notification', source, "You have successfully respawned yourself.", 4000, "check")
             TriggerEvent('Kratos-Logging:AdresLogs', source, GetPlayerName(source), GetPlayerName(source))
         end
-    -- else
-    --     TriggerClientEvent('codem-notification', source, "You must be clocked in to use this command.", 4000, "error")
-    -- end
+    else
+        TriggerClientEvent('codem-notification', source, "You must be clocked in to use this command.", 4000, "error")
+    end
 end)
