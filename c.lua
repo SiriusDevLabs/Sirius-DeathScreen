@@ -36,53 +36,53 @@ end)
 
 Citizen.CreateThread(function()
 
-    -- exports.ox_target:addGlobalPlayer({
-    --     name = "help_up_knockedoutplayer",
-    --     icon = "fa-solid fa-handshake-angle",
-    --     label = "Help Up",
-    --     canInteract = function(entity, distance, coords)
-    --         local DeathSource = GetPedCauseOfDeath(entity)
-    --         if distance > 2.0 then
-    --             return false
-    --         end
-    --         if not IsMelee(DeathSource)  then
-    --             return false
-    --         end
-    --         if not IsEntityDead(ped) then
-    --             return false
-    --         end
+    exports.ox_target:addGlobalPlayer({
+        name = "help_up_knockedoutplayer",
+        icon = "fa-solid fa-handshake-angle",
+        label = "Help Up",
+        canInteract = function(entity, distance, coords)
+            local DeathSource = GetPedCauseOfDeath(entity)
+            if distance > 2.0 then
+                return false
+            end
+            if not IsMelee(DeathSource)  then
+                return false
+            end
+            if not IsEntityDead(ped) then
+                return false
+            end
     
-    --         return true
-    --     end,
-    --     onSelect = function(data)
-    --         local targetPed = data.entity
-    --         local targetNetworkId = NetworkGetPlayerIndexFromPed(targetPed)
-    --         local targetServerId = GetPlayerServerId(targetNetworkId)
+            return true
+        end,
+        onSelect = function(data)
+            local targetPed = data.entity
+            local targetNetworkId = NetworkGetPlayerIndexFromPed(targetPed)
+            local targetServerId = GetPlayerServerId(targetNetworkId)
 
-    --             TaskTurnPedToFaceEntity(ped, cache.ped, 500)
-    --             ExecuteCommand("e medic")
+                TaskTurnPedToFaceEntity(ped, cache.ped, 500)
+                ExecuteCommand("e medic")
     
-    --             if lib.progressBar({
-    --                 duration = 5000,
-    --                 label = "Helping Up...",
-    --                 useWhileDead = false,
-    --                 allowRagdoll = false,
-    --                 allowCuffed = false,
-    --                 allowFalling = false,
-    --                 canCancel = true,
-    --                 disable = {
-    --                     car = true
-    --                 }
-    --             }) then
-    --                 ExecuteCommand("me helps up")
-    --                 TriggerServerEvent("NahRyan:RevivePed", targetServerId)
-    --                 Wait(1000)
-    --                 ExecuteCommand("e c")
-    --             else
-    --                 ExecuteCommand("e c")
-    --             end
-    --     end
-    -- })
+                if lib.progressBar({
+                    duration = 5000,
+                    label = "Helping Up...",
+                    useWhileDead = false,
+                    allowRagdoll = false,
+                    allowCuffed = false,
+                    allowFalling = false,
+                    canCancel = true,
+                    disable = {
+                        car = true
+                    }
+                }) then
+                    ExecuteCommand("me helps up")
+                    TriggerServerEvent("NahRyan:RevivePed", targetServerId)
+                    Wait(1000)
+                    ExecuteCommand("e c")
+                else
+                    ExecuteCommand("e c")
+                end
+        end
+    })
 
 
 
