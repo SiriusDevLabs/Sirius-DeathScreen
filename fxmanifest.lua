@@ -7,6 +7,7 @@ version "BETA"
 
 shared_script {
 	'config.lua',
+	'@ox_lib/init.lua',
 }
 
 client_script 'client/main.lua'
