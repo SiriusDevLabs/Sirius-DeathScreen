@@ -5,6 +5,8 @@ author "〃Sirius Studios / NahRyan"
 description "Full vMenu Framework"
 version "BETA"
 
+lua54 "yes"
+
 shared_script {
 	'config.lua',
 	'@ox_lib/init.lua',
