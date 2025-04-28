@@ -1,4 +1,6 @@
 Config = {
+    ReviveAce = "sirius.revive",
+    RespawnAce = "sirius.respawn",
     Blur = true, -- Enables blur when player die
     Controls = {
         Mouse = true,
@@ -27,7 +29,6 @@ Config = {
     },
 
     DeadlyMelee = {
-        -- melee weapons that should NOT knock out a player and instead kill them
         [GetHashKey("weapon_dagger")] = true,
         [GetHashKey("weapon_battleaxe")] = true,
         [GetHashKey("weapon_hatchet")] = true,

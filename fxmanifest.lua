@@ -1,17 +1,18 @@
-fx_version 'cerulean'
-game 'gta5'
+fx_version "adamant"
+game "gta5"
+
+author "〃Sirius Studios / NahRyan"
+description "Full vMenu Framework"
+version "BETA"
+
 shared_script {
 	'config.lua',
-	--'@qb-ambulancejob/config.lua'
-	'@ox_lib/init.lua',
-	
 }
 
-lua54 'yes'
+client_script 'client/main.lua'
+server_script 'server/main.lua'
 
-escrow_ignore 'config.lua'
-client_script 'c.lua'
-server_script 's.lua'
+
 ui_page 'html/index.html'
 files {
 	'html/index.html',

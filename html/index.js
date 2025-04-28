@@ -50,25 +50,23 @@ window.addEventListener('message', function(event) {
         }
     } else if (ed.action === "updatecolor") {
         var deathTitle = document.getElementById("DeathTitle");
-    
-        // Function to lighten the color
+
         function lightenColor(rgb, percent) {
             var r = Math.min(255, Math.floor(rgb.r + (255 - rgb.r) * percent));
             var g = Math.min(255, Math.floor(rgb.g + (255 - rgb.g) * percent));
             var b = Math.min(255, Math.floor(rgb.b + (255 - rgb.b) * percent));
             return { r: r, g: g, b: b };
         }
-    
-        // Parse the rgb values from the data.color string
-        var rgbString = ed.color; // e.g., "rgb(123, 123, 123)"
-        var rgbValues = rgbString.match(/\d+/g); // Extracts the numbers
+
+        var rgbString = ed.color;
+        var rgbValues = rgbString.match(/\d+/g);
         var color = {
             r: parseInt(rgbValues[0]),
             g: parseInt(rgbValues[1]),
             b: parseInt(rgbValues[2])
         };
     
-        var lightColor = lightenColor(color, 0.5); // Lighten by 50%
+        var lightColor = lightenColor(color, 0.5);
     
         deathTitle.style.textShadow = "0px 0px 20px rgb(" + lightColor.r + "," + lightColor.g + "," + lightColor.b + ")";
         deathTitle.style.background = "linear-gradient(90deg, rgb(" + lightColor.r + "," + lightColor.g + "," + lightColor.b + ") 25.87%, rgb(" + (lightColor.r - 30) + "," + (lightColor.g - 30) + "," + (lightColor.b - 30) + ") 56.93%, rgb(" + (lightColor.r - 60) + "," + (lightColor.g - 60) + "," + (lightColor.b - 60) + ") 86.71%)";
@@ -78,7 +76,7 @@ window.addEventListener('message', function(event) {
         accent_colour = "rgb(" + lightColor.r + "," + lightColor.g + "," + lightColor.b + ")";
 
         var imageElement = document.getElementById("DeathImage");
-    recolorImage(imageElement, color)
+        recolorImage(imageElement, color)
     }
 })
 
@@ -98,30 +96,29 @@ function recolorImage(imageElement, targetColor) {
 
     // Recolor the image
     for (var i = 0; i < data.length; i += 4) {
-        data[i] = targetColor.r;     // Red
-        data[i + 1] = targetColor.g; // Green
-        data[i + 2] = targetColor.b; // Blue
-        // data[i + 3] is the alpha channel
+        data[i] = targetColor.r;
+        data[i + 1] = targetColor.g;
+        data[i + 2] = targetColor.b;
     }
 
     ctx.putImageData(imageData, 0, 0);
-    imageElement.src = canvas.toDataURL(); // Set the image source to the modified canvas
+    imageElement.src = canvas.toDataURL();
 }
 
 function showElement() {
     var element = document.getElementById("body");
-    element.style.display = "block"; // Make sure the element is visible
+    element.style.display = "block";
     setTimeout(function() {
-      element.style.opacity = 1; // Fade in
-    }, 10); // Small delay to allow display property to take effect
+      element.style.opacity = 1;
+    }, 10);
   }
   
   function hideElement() {
     var element = document.getElementById("body");
-    element.style.opacity = 0; // Fade out
+    element.style.opacity = 0;
     setTimeout(function() {
       document.getElementById("body").style.display = "none";
-    }, 800); // Match this delay to the CSS transition duration
+    }, 800);
   }
   
 function startTimer(duration) {

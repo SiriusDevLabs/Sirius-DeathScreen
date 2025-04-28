@@ -21,17 +21,11 @@ function OpenDeathScreen(time, type)
 end
 
 AddEventHandler('onClientMapStart', function()
-	Citizen.Trace("RPRevive: Disabling le autospawn.")
-	exports.spawnmanager:spawnPlayer() -- Ensure player spawns into server.
+	Citizen.Trace("SiriusDeath: Disabling Autorespawn.")
+	exports.spawnmanager:spawnPlayer()
 	Citizen.Wait(2500)
 	exports.spawnmanager:setAutoSpawn(false)
-	Citizen.Trace("RPRevive: Autospawn is disabled.")
-end)
-
-CreateThread(function()
-    Citizen.Wait(500)
-    local accent_colour = exports['sasrp-ui']:GetAccentColour()
-    SendNUIMessage({action = "updatecolor", color = accent_colour})
+	Citizen.Trace("SiriusDeath: Autospawn is disabled.")
 end)
 
 Citizen.CreateThread(function()
@@ -75,7 +69,7 @@ Citizen.CreateThread(function()
                     }
                 }) then
                     ExecuteCommand("me helps up")
-                    TriggerServerEvent("NahRyan:RevivePed", targetServerId)
+                    TriggerServerEvent("SiriusDeath:RevivePed", targetServerId)
                     Wait(1000)
                     ExecuteCommand("e c")
                 else
@@ -123,8 +117,8 @@ Citizen.CreateThread(function()
 
 end)
 
-RegisterNetEvent('NahRyan:RevivePlayer')
-	AddEventHandler('NahRyan:RevivePlayer', function()
+RegisterNetEvent('SiriusDeath:RevivePlayer')
+	AddEventHandler('SiriusDeath:RevivePlayer', function()
 	local ped = GetPlayerPed(-1);
     local playerPos = GetEntityCoords(ped, true)
 	if IsEntityDead(ped) then 
@@ -132,18 +126,16 @@ RegisterNetEvent('NahRyan:RevivePlayer')
         NetworkResurrectLocalPlayer(playerPos, true, true, false)
 		SetPlayerInvincible(ped, false)
 		ClearPedBloodDamage(ped)
-        TriggerEvent("s4-cuff:client:removeall")
 	end
 end)
 
-RegisterNetEvent('NahRyan:RespawnPlayer')
-	AddEventHandler('NahRyan:RespawnPlayer', function()
+RegisterNetEvent('SiriusDeath:RespawnPlayer')
+	AddEventHandler('SiriusDeath:RespawnPlayer', function()
 	local ped = GetPlayerPed(-1);
     local playerPos = GetEntityCoords(ped, true)
 	if IsEntityDead(ped) then 
         SetCurrentPedWeapon(cache.ped, unarmed, true)
         RespawnPed(GetPlayerPed(-1))
-        TriggerEvent("s4-cuff:client:removeall")
 	end
 end)
 
@@ -172,7 +164,7 @@ Citizen.CreateThread(function()
 end)
 
 RegisterNetEvent(
-	"NahRyan:HelpUpPlayer",
+	"SiriusDeath:HelpUpPlayer",
 	function(src)
 		RevivePed()
 	end
@@ -234,7 +226,6 @@ end
 
 function RespawnPed()
     SetCurrentPedWeapon(cache.ped, unarmed, true)
-    TriggerEvent("s4-cuff:client:removeall")
     isDead = false
             SendNUIMessage({action = "DSMenu", open = false})
             if Config.Blur then
@@ -283,10 +274,9 @@ end
 
 function getClosestRespawnLocation(deathX, deathY, deathZ)
     local closestLocation = nil
-    local closestDistance = math.huge -- Start with the largest possible number
+    local closestDistance = math.huge
 
     for name, location in pairs(Config.RespawnLocations) do
-        -- Calculate the distance using the Pythagorean theorem
         local distance = math.sqrt(
             (location.x - deathX)^2 +
             (location.y - deathY)^2 +
@@ -307,8 +297,8 @@ RegisterNUICallback('response', function(data, cb)
     canrespawn = true
 end)
 
-RegisterNetEvent('sasrp-ui:accentChanged')
-AddEventHandler('sasrp-ui:accentChanged', function(data)
+RegisterNetEvent('SiriusDeath:accentChanged')
+AddEventHandler('SiriusDeath:accentChanged', function(data)
     accent_colour = data
     SendNUIMessage({action = "updatecolor", color = accent_colour})
     print(data)
