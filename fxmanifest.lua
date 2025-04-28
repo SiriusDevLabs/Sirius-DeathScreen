@@ -2,7 +2,7 @@ fx_version "adamant"
 game "gta5"
 
 author "〃Sirius Studios / NahRyan"
-description "Full vMenu Framework"
+description "Standalone Death Screen"
 version "BETA"
 
 lua54 "yes"
