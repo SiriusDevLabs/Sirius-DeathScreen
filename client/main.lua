@@ -242,7 +242,6 @@ function RespawnPed()
             SetPlayerInvincible(player, false)
                 local closestLocation = getClosestRespawnLocation(PedCoords.x, PedCoords.y, PedCoords.z)
                 if closestLocation then
-                    InitialSetup()
 
                     DoScreenFadeOut(200)
                     while IsScreenFadingOut() do
